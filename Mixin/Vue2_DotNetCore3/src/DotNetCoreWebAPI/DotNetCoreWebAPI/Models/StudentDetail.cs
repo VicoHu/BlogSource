@@ -13,6 +13,7 @@ namespace DotNetCoreWebAPI.Models
         public string ImgUrl { get; set; }
         public int ClassId { get; set; }
         public int TeacherUserId { get; set; }
+        public string StudentId { get; set; }
 
         public virtual Class Class { get; set; }
         public virtual TeacherDetail TeacherUser { get; set; }

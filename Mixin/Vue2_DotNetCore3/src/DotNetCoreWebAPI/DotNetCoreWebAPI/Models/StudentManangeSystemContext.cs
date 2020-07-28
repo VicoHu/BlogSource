@@ -93,6 +93,11 @@ namespace DotNetCoreWebAPI.Models
                     .HasColumnName("phone")
                     .HasMaxLength(11);
 
+                entity.Property(e => e.StudentId)
+                    .IsRequired()
+                    .HasColumnName("student_id")
+                    .HasMaxLength(50);
+
                 entity.Property(e => e.TeacherUserId).HasColumnName("teacher_user_id");
 
                 entity.HasOne(d => d.Class)
