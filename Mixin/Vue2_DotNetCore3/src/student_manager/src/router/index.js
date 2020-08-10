@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import StudentHome from "../views/StudentHome.vue";
 import AdminHome from "../views/AdminHome.vue";
-import TeacherHome from "../views/TeacherHome.vue";
+// import TeacherHome from "../views/TeacherHome.vue";
 import login from "../views/login.vue";
 
 Vue.use(VueRouter);
@@ -24,29 +24,7 @@ const routes = [
     name: "StudentHome",
     component: StudentHome,
   },
-  {
-    path: "/TeacherHome",
-    name: "TeacherHome",
-    component: TeacherHome,
-    children: [
-      {
-        path: "NormalTest",
-        name: "NormalTest",
-        // 懒加载
-        component: () => import("@/views/teacher/NormalTest.vue")
-      },
-      {
-        path: "StageTest",
-        name: "StageTest",
-        component: () => import("@/views/teacher/StageTest.vue")
-      },
-      {
-        path: "MyStudent",
-        name: "MyStudent",
-        component: () => import("@/views/teacher/MyStudent.vue")
-      }
-    ],
-  },
+  
   {
     path: "/AdminHome",
     name: "AdminHome",

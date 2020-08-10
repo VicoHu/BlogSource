@@ -8,12 +8,14 @@ export default new Vuex.Store({
     // 登录状态
     LoginState: false,
     // 用户信息对象
-    UserInfo:{},
-    TeacherRouter: {
-
-    }
+    UserInfo: {},
+    TeacherRouter: {},
   },
-  mutations: {},
+  mutations: {
+    Set_UserInfo(state, obj) {
+      state.UserInfo = obj;
+    },
+  },
   actions: {},
-  modules: {}
+  modules: {},
 });

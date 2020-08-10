@@ -19,6 +19,7 @@ namespace DotNetCoreWebAPI.Controllers
         /// <param name="Password"></param>
         /// <returns></returns>
         [HttpPost]
+        //[HttpPost]
         public JsonResult PostLogin(string UserName, string Password)
         {
             StudentManangeSystemContext db = new StudentManangeSystemContext();
@@ -47,21 +48,35 @@ namespace DotNetCoreWebAPI.Controllers
         /// <param name="stu"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult PostAdd(StudentDetail stu)
+        public JsonResult PostAdd(int UserId, string Name, bool Gender, string Phone, string Email, string ImgUrl, int ClassId, int TeacherUserId, string StudentId)
         {
             StudentManangeSystemContext db = new StudentManangeSystemContext();
             using (var transition = db.Database.BeginTransaction())
             {
                 db.User.Add(new User()
                 {
-                    Name = stu.StudentId,
-                    Password = stu.StudentId,
+                    Name = StudentId,
+                    Password = StudentId,
                     IsEnable = true,
                     PermissionCode = 3
                 });
                 if (db.SaveChanges() > 0)
                 {
-                    db.StudentDetail.Add(stu);
+                    var sUser = db.User.Where(u => u.Name == StudentId).FirstOrDefault();
+                    var student = new StudentDetail()
+                    {
+                        UserId = UserId,
+                        Name = Name,
+                        Gender = Gender,
+                        Phone = Phone,
+                        Email = Email,
+                        ImgUrl = ImgUrl,
+                        ClassId = ClassId,
+                        TeacherUserId = TeacherUserId,
+                        StudentId = StudentId
+                    };
+                    student.UserId = sUser.Id;
+                    db.StudentDetail.Add(student);
                     if (db.SaveChanges() > 0)
                     {
                         transition.Commit();

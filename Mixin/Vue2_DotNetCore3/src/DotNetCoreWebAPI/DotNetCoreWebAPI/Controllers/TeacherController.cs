@@ -19,13 +19,14 @@ namespace DotNetCoreWebAPI.Controllers
         /// <param name="PassWord"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult PostLogin(string UserName,string PassWord) 
+        public JsonResult PostLogin( string UserName,string PassWord) 
         {
             StudentManangeSystemContext db = new StudentManangeSystemContext();
-            bool state = db.User.Where(u=>u.Name == UserName && u.Password == PassWord && u.PermissionCode == 2).Count() > 0;
+            bool state = db.User.Where(u=>u.Name == UserName && u.Password == PassWord && u.PermissionCode == 2 && u.IsEnable == true).Count() > 0;
             return new JsonResult(new
             {
-                state = state
+                state = state,
+                info = db.User.Where(u => u.Name == UserName && u.Password == PassWord && u.PermissionCode == 2 && u.IsEnable == true).ToList()
             });
         }
 

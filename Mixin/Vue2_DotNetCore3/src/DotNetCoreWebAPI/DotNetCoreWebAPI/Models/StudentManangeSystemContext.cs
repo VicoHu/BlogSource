@@ -73,15 +73,12 @@ namespace DotNetCoreWebAPI.Models
                 entity.Property(e => e.ClassId).HasColumnName("class_id");
 
                 entity.Property(e => e.Email)
-                    .IsRequired()
                     .HasColumnName("email")
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Gender).HasColumnName("gender");
 
-                entity.Property(e => e.ImgUrl)
-                    .IsRequired()
-                    .HasColumnName("img_url");
+                entity.Property(e => e.ImgUrl).HasColumnName("img_url");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -89,7 +86,6 @@ namespace DotNetCoreWebAPI.Models
                     .HasMaxLength(20);
 
                 entity.Property(e => e.Phone)
-                    .IsRequired()
                     .HasColumnName("phone")
                     .HasMaxLength(11);
 
@@ -103,7 +99,6 @@ namespace DotNetCoreWebAPI.Models
                 entity.HasOne(d => d.Class)
                     .WithMany(p => p.StudentDetail)
                     .HasForeignKey(d => d.ClassId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_student_detail_class");
 
                 entity.HasOne(d => d.TeacherUser)
@@ -111,12 +106,6 @@ namespace DotNetCoreWebAPI.Models
                     .HasForeignKey(d => d.TeacherUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_student_detail_teacher_detail");
-
-                entity.HasOne(d => d.User)
-                    .WithOne(p => p.StudentDetail)
-                    .HasForeignKey<StudentDetail>(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_student_detail_student_detail");
             });
 
             modelBuilder.Entity<TeacherDetail>(entity =>

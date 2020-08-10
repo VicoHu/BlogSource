@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import axios from "./API/axios.config";
 
 // 引入ElementUI组件依赖
 import ElementUI from 'element-ui';
@@ -10,6 +11,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 // 安装ElementUI插件到Vue全局
 Vue.use(ElementUI);
+
+Vue.prototype.axios = axios;
+
 
 Vue.config.productionTip = false;
 
